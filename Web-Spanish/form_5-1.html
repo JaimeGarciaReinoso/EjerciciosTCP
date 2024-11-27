@@ -1,0 +1,353 @@
+<html>
+	<head>
+<style>
+table, th {
+	border: 1px solid black;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</head>
+<body>
+
+	<p> Ejercicio 5 - Parte 1</p>
+	<p>Un usuario quiere reservar un vuelo en la web http://www.vuel.os Supongamos que el PC del usuario obtiene de su servidor local de DNS la dirección IP del servidor HTTP, que denotaremos por IPweb. Sabemos que el fichero index.html en dicho servidor ocupa 2736 octetos y contiene dos etiquetas &ltimg src="enlace"&gt a dos imágenes, también almacenadas en el servidor, y que se llaman caribe.png (ocupa 4196 octetos) y maldivas.png  (ocupa 5656 octetos) que se descargarán en ese orden. Puede asumir que todas las peticiones GET de HTTP ocupan 1460 octetos, y en todas las repuestas del servidor la cabecera HTTP (es decir, la suma de la línea de estado, las cabeceras y la línea en blanco) ocupan 184 octetos en total. El servidor http implementa la versión HTTP/1.1 sin canalización.
+Con respecto al funcionamiento del protocolo TCP suponga que:
+	<ul>
+		<li>El tamaño máximo de segmento TCP (MSS) es 1460 octetos en el cliente del usuario y 1580 octetos en el servidor HTTP.</li>
+		<li>El envío de cada segmento se produce en el inicio de un ‘tic’ de reloj.</li>
+		<li>El tiempo de transmisión de una trama es despreciable.</li>
+		<li>Cada segmento tarda medio ‘tic’ en llegar a la entidad contraria.</li>
+		<li>La confirmación de la recepción de segmentos se realiza de acuerdo con la política vista en clase</li>
+		<li>En caso de que venza el temporizador de retransmisión sólo se retransmite el segmento más antiguo pendiente de confirmación.</li>
+		<li>No se descartan los segmentos recibidos fuera de secuencia.</li>
+		<li>El valor de la variable umbral es 4 MSS.</li>
+		<li>El PC del usuario comienza con un SN=199 y el servidor de HTTP con un SN=2999.</li>
+		<li>Las entidades TCP manejan “Ventanas de Recepción” de 5840 octetos y emplean técnicas de control de congestión de arranque lento, de evitación de la congestión y de recuperación rápida.</li>
+	</ul>
+	</p>
+
+	<p>Refleje en un diagrama temporal el intercambio de segmentos TCP que se produce entre el PC del alumno y el servidor http hasta que se obtiene el fichero index.html (incluya el establecimiento de la conexión si fuera necesario, en donde se puede enviar datos en el tercer segmento). Asuma que los tiempos de procesamiento son despreciables.</p>
+
+
+<form action="check.php" method="POST">
+	<input type="hidden" id="ExerciseID" name="ExerciseID" value="20">
+<table>
+	<tr>
+		<th colspan="8">Client</th>
+		<td></td>
+		<th colspan="8">Server</th>
+	</tr>
+	<tr>
+		<th>SN</th>
+		<th>AN</th>
+		<th>SYN</th>
+		<th>ACK</th>
+		<th>FIN</th>
+		<th>W</th>
+		<th>MSS</th>
+		<th>Data Len</th>
+		<td></td>
+		<th>SN</th>
+		<th>AN</th>
+		<th>SYN</th>
+		<th>ACK</th>
+		<th>FIN</th>
+		<th>W</th>
+		<th>MSS</th>
+		<th>Data Len</th>
+	</tr>
+	<tr>
+		<td><input type="text" name="c1-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c1-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c1-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c1-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c1-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c1-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c1-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c1-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s1-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s1-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s1-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s1-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s1-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s1-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s1-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s1-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c2-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c2-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c2-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c2-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c2-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c2-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c2-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c2-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s2-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s2-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s2-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s2-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s2-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s2-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s2-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s2-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c3-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c3-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c3-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c3-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c3-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c3-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c3-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c3-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s3-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s3-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s3-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s3-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s3-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s3-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s3-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s3-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c4-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c4-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c4-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c4-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c4-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c4-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c4-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c4-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s4-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s4-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s4-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s4-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s4-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s4-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s4-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s4-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c5-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c5-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c5-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c5-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c5-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c5-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c5-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c5-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s5-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s5-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s5-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s5-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s5-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s5-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s5-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s5-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c6-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c6-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c6-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c6-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c6-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c6-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c6-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c6-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s6-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s6-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s6-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s6-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s6-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s6-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s6-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s6-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c7-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c7-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c7-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c7-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c7-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c7-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c7-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c7-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s7-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s7-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s7-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s7-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s7-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s7-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s7-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s7-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c8-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c8-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c8-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c8-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c8-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c8-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c8-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c8-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s8-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s8-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s8-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s8-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s8-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s8-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s8-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s8-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c9-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c9-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c9-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c9-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c9-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c9-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c9-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c9-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s9-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s9-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s9-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s9-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s9-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s9-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s9-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s9-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c10-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c10-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c10-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c10-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c10-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c10-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c10-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c10-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s10-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s10-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s10-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s10-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s10-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s10-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s10-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s10-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c11-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c11-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c11-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c11-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c11-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c11-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c11-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c11-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s11-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s11-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s11-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s11-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s11-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s11-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s11-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s11-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c12-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c12-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c12-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c12-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c12-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c12-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c12-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c12-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s12-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s12-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s12-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s12-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s12-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s12-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s12-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s12-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c13-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c13-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c13-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c13-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c13-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c13-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c13-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c13-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s13-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s13-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s13-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s13-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s13-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s13-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s13-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s13-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c14-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c14-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c14-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c14-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c14-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c14-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c14-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c14-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s14-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s14-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s14-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s14-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s14-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s14-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s14-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s14-datalen" size="5" value="NULL"><br></td>
+	</tr>
+	<tr>
+		<td><input type="text" name="c15-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="c15-an" size="5" value="NULL"></td>
+		<td><input type="text" name="c15-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="c15-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="c15-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="c15-w" size="5" value="NULL"></td>
+		<td><input type="text" name="c15-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="c15-datalen" size="5" value="NULL"></td>
+		<td>----------------------</td>
+		<td><input type="text" name="s15-sn" size="5" value="NULL"></td>
+		<td><input type="text" name="s15-an" size="5" value="NULL"></td>
+		<td><input type="text" name="s15-syn" size="1" value="NULL"></td>
+		<td><input type="text" name="s15-ack" size="1" value="NULL"></td>
+		<td><input type="text" name="s15-fin" size="1" value="NULL"></td>
+		<td><input type="text" name="s15-w" size="5" value="NULL"></td>
+		<td><input type="text" name="s15-mss" size="5" value="NULL"></td>
+		<td><input type="text" name="s15-datalen" size="5" value="NULL"><br></td>
+	</tr>
+
+
+<input type="submit">
+</form>
+
+</table>
+
+</body>
+</html>
+
