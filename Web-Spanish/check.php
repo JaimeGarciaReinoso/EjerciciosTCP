@@ -1,4 +1,13 @@
 <html>
+	<head>
+		<style>
+			table, th {
+			border: 1px solid black;
+		}
+		</style>
+		<link rel="stylesheet" href="style.css">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</head>
 <body>
  <?php
 
@@ -112,63 +121,78 @@ foreach ($_POST as $key => $val) {
 $ticAux = 0;
 $senderAux = 0;
 
+
 echo "<table>
-        <tr>
-                <th colspan=\"8\">Client</th>
-                <td></td>
-                <th colspan=\"8\">Server</th>
+	<tr class=\"header-row\">
+		<th class=\"top-header\" colspan=\"8\">Client</th>
+		<td></td>
+		<th class=\"top-header\" colspan=\"8\">Server</th>
 	</tr>
-        <tr>
-                <th>SN</th>
-                <th>AN</th>
-                <th>SYN</th>
-                <th>ACK</th>
-                <th>FIN</th>
-                <th>W</th>
-                <th>MSS</th>
-                <th>Data Len</th>
-                <td></td>
-                <th>SN</th>
-                <th>AN</th>
-                <th>SYN</th>
-                <th>ACK</th>
-                <th>FIN</th>
-                <th>W</th>
-                <th>MSS</th>
-                <th>Data Len</th>
-        </tr>
+	<tr>
+		<th class=\"bottom-header\">SN</th>
+		<th class=\"bottom-header\">AN</th>
+		<th class=\"bottom-header\">SYN</th>
+		<th class=\"bottom-header\">ACK</th>
+		<th class=\"bottom-header\">FIN</th>
+		<th class=\"bottom-header\">W</th>
+		<th class=\"bottom-header\">MSS</th>
+		<th class=\"bottom-header\">Data Len</th>
+		<td></td>
+		<th class=\"bottom-header\">SN</th>
+		<th class=\"bottom-header\">AN</th>
+		<th class=\"bottom-header\">SYN</th>
+		<th class=\"bottom-header\">ACK</th>
+		<th class=\"bottom-header\">FIN</th>
+		<th class=\"bottom-header\">W</th>
+		<th class=\"bottom-header\">MSS</th>
+		<th class=\"bottom-header\">Data Len</th>
+	</tr>
 	<tr>";
 
 $errors=0;
 
-while ($ticAux < 16) {
+while ($ticAux < 15) {
 	for ($i = 0; $i < 8; $i++) {
-      if ($errors >=3) {
-        echo "<td bgcolor=\"yellow\">";
-      } elseif ($postArray[2*$ticAux+$senderAux][$i] != $arraySeg[2*$ticAux+$senderAux][$i]) {
-			echo "<td bgcolor=\"red\">";
-      		$errors++;
-        } else
-			echo "<td bgcolor=\"LightGreen\">";
-		echo $postArray[2*$ticAux+$senderAux][$i] . "</td>";		
-			//echo "Mismatch in tic = $ticAux, sender = $senderAux, field= $i | Student: " .  $postArray[2*$ticAux+$senderAux][$i] . " vs  Answer: " . $arraySeg[2*$ticAux+$senderAux][$i] . "<br>";
+	  if ($senderAux == 0) {
+			if ($errors >=3) {
+				echo "<td><input disabled id=\"yellow\" type=\"text\" side=\"client\" size=\"5\" value=\""; 
+			} elseif ($postArray[2*$ticAux+$senderAux][$i] != $arraySeg[2*$ticAux+$senderAux][$i]) {
+				echo "<td><input disabled id=\"red\" type=\"text\" side=\"client\" size=\"5\" value=\""; 
+				$errors++;
+			} else
+				echo "<td><input disabled id=\"green\" type=\"text\" side=\"client\" size=\"5\" value=\""; 
+		
+	  } else {
+			if ($errors >=3) {
+				echo "<td><input disabled id=\"yellow\" type=\"text\" side=\"server\" size=\"5\" value=\""; 
+			} elseif ($postArray[2*$ticAux+$senderAux][$i] != $arraySeg[2*$ticAux+$senderAux][$i]) {
+				echo "<td><input disabled id=\"red\" type=\"text\" side=\"server\" size=\"5\" value=\""; 
+				$errors++;
+			} else
+				echo "<td><input disabled id=\"green\" type=\"text\" side=\"server\" size=\"5\" value=\""; 
+			}
+		echo $postArray[2*$ticAux+$senderAux][$i] . "\"></td>\n";		
+				//echo "Mismatch in tic = $ticAux, sender = $senderAux, field= $i | Student: " .  $postArray[2*$ticAux+$senderAux][$i] . " vs  Answer: " . $arraySeg[2*$ticAux+$senderAux][$i] . "<br>";
+      
 	}
 	$senderAux = ($senderAux + 1) % 2;
 	if ($senderAux == 0) {
 		$ticAux = $ticAux + 1;
-		echo "</tr><tr>";
+		echo "</tr><tr>\n";
 	} else {
-		echo "<td>-------------</td>";
+		echo "<td class=\"ticktemplate\"></td>\n";
 	}
 }	
 echo "</tr> </table>";
 
 if ($errors == 0)
   echo "<h2>¡Felicidades! ¡Tu respuesta es correcta!</h2>";
+elseif ($errors == 1)
+  echo "<h3>Lo siento, tienes un error. <br>Inténtalo otra vez dándole al botón de ir atrás en tu navegador.</h3>";
 elseif ($errors < 3)
   echo "<h3>Lo siento, tienes " . $errors . " errores. <br>Inténtalo otra vez dándole al botón de ir atrás en tu navegador.</h3>";
 else
-  echo "<h3>Tienes tres errores o más y por lo tanto no se han corregido completamente tu respuesta. <br>Inténtalo otra vez dándole al botón de ir atrás en tu navegador.</h3>";
+  echo "<h3>Tienes tres errores o más y por lo tanto no se ha corregido completamente tu respuesta. <br>Inténtalo otra vez dándole al botón de ir atrás en tu navegador.</h3>";
 
 ?>
  
@@ -177,7 +201,7 @@ else
       Para volver al índice principal pulsar <a href="index.html">aquí</a>.
   </h3>
   </p>
-
+<script src="tcp.js"></script>
 </body>
 </html>
 
