@@ -130,3 +130,10 @@ td {
     border: 1px solid #27ae6080;
     color: #2c3e50;
 }
+
+#white {
+    background-color: #ffffffff;
+    border-radius: 2px;
+    border: 1px solid #27ae6080;
+    color: #2c3e50;
+}

@@ -155,21 +155,21 @@ while ($ticAux < 15) {
 	for ($i = 0; $i < 8; $i++) {
 	  if ($senderAux == 0) {
 			if ($errors >=3) {
-				echo "<td><input disabled id=\"yellow\" type=\"text\" side=\"client\" size=\"5\" value=\""; 
+				echo "<td><input disabled id=\"white\" type=\"text\" side=\"client\" size=\"5\" value=\""; 
 			} elseif ($postArray[2*$ticAux+$senderAux][$i] != $arraySeg[2*$ticAux+$senderAux][$i]) {
-				echo "<td><input disabled id=\"red\" type=\"text\" side=\"client\" size=\"5\" value=\""; 
+				echo "<td><input disabled id=\"white\" type=\"text\" side=\"client\" size=\"5\" value=\""; 
 				$errors++;
 			} else
-				echo "<td><input disabled id=\"green\" type=\"text\" side=\"client\" size=\"5\" value=\""; 
+				echo "<td><input disabled id=\"white\" type=\"text\" side=\"client\" size=\"5\" value=\""; 
 		
 	  } else {
 			if ($errors >=3) {
-				echo "<td><input disabled id=\"yellow\" type=\"text\" side=\"server\" size=\"5\" value=\""; 
+				echo "<td><input disabled id=\"white\" type=\"text\" side=\"server\" size=\"5\" value=\""; 
 			} elseif ($postArray[2*$ticAux+$senderAux][$i] != $arraySeg[2*$ticAux+$senderAux][$i]) {
-				echo "<td><input disabled id=\"red\" type=\"text\" side=\"server\" size=\"5\" value=\""; 
+				echo "<td><input disabled id=\"white\" type=\"text\" side=\"server\" size=\"5\" value=\""; 
 				$errors++;
 			} else
-				echo "<td><input disabled id=\"green\" type=\"text\" side=\"server\" size=\"5\" value=\""; 
+				echo "<td><input disabled id=\"white\" type=\"text\" side=\"server\" size=\"5\" value=\""; 
 			}
 		echo $postArray[2*$ticAux+$senderAux][$i] . "\"></td>\n";		
 				//echo "Mismatch in tic = $ticAux, sender = $senderAux, field= $i | Student: " .  $postArray[2*$ticAux+$senderAux][$i] . " vs  Answer: " . $arraySeg[2*$ticAux+$senderAux][$i] . "<br>";
