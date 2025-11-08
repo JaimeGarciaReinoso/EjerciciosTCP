@@ -178,7 +178,7 @@ while ($ticAux < 15) {
 	  if ($postArray[2*$ticAux+$senderAux][$i] == "NULL") {
 		  $value = "";
 	  } else {
-		  $value = $postArray[2*$ticAux+$senderAux][$i];
+		  $value = htmlspecialchars($postArray[2*$ticAux+$senderAux][$i],ENT_QUOTES, 'UTF-8');
 	  }
 	  echo $value . "\"></td>\n";		
 				//echo "Mismatch in tic = $ticAux, sender = $senderAux, field= $i | Student: " .  $postArray[2*$ticAux+$senderAux][$i] . " vs  Answer: " . $arraySeg[2*$ticAux+$senderAux][$i] . "<br>";
