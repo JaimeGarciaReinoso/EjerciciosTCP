@@ -90,7 +90,11 @@ $postArray = array();
 $auxArray = array();
 foreach ($_POST as $key => $val) {
 	if ($exerciseIDAux > 0) {
-		$auxArray[] = $val;
+		if ($val == "") {
+			$auxArray[] = "NULL";
+		} else {
+			$auxArray[] = $val;
+		}
 		$aux = $aux + 1;
 		if ($aux == 8) {
 			$postArray[] = $auxArray;
@@ -170,8 +174,13 @@ while ($ticAux < 15) {
 				$errors++;
 			} else
 				echo "<td><input disabled id=\"green\" type=\"text\" side=\"server\" size=\"5\" value=\""; 
-			}
-		echo $postArray[2*$ticAux+$senderAux][$i] . "\"></td>\n";		
+	  }
+	  if ($postArray[2*$ticAux+$senderAux][$i] == "NULL") {
+		  $value = "";
+	  } else {
+		  $value = $postArray[2*$ticAux+$senderAux][$i];
+	  }
+	  echo $value . "\"></td>\n";		
 				//echo "Mismatch in tic = $ticAux, sender = $senderAux, field= $i | Student: " .  $postArray[2*$ticAux+$senderAux][$i] . " vs  Answer: " . $arraySeg[2*$ticAux+$senderAux][$i] . "<br>";
       
 	}

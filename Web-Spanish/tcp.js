@@ -5,7 +5,7 @@ window.onload = (event) => {
         input.addEventListener("input", (event) => {
 
             //Check if null for opacity
-            if(event.target.value == "NULL"){
+            if(event.target.value == ""){
                 event.target.classList.add('nullinput');
             }else{
                 event.target.classList.remove('nullinput');
@@ -17,7 +17,7 @@ window.onload = (event) => {
 
             for (child of event.target.parentNode.parentNode.children){
                 if(child.children.length > 0){
-                    if((child.firstElementChild.value != "NULL") && (child.firstElementChild.getAttribute("side") == side)){
+                    if((child.firstElementChild.value != "") && (child.firstElementChild.getAttribute("side") == side)){
                         flag = true
                     }
                 }

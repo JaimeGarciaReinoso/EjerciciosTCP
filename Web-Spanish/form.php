@@ -70,23 +70,23 @@ echo "<h2> <b>Ejercicio " .$result->ExerciseNum ." - Parte " .$result->ExerciseP
 	for ($x=1;$x<=15;$x++) {
 			echo "
 	<tr>
-		<td><input type=\"text\" side=\"client\" name=\"c".$x."-sn\" size=\"5\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"client\" name=\"c".$x."-an\" size=\"5\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"client\" name=\"c".$x."-syn\" size=\"1\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"client\" name=\"c".$x."-ack\" size=\"1\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"client\" name=\"c".$x."-fin\" size=\"1\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"client\" name=\"c".$x."-w\" size=\"5\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"client\" name=\"c".$x."-mss\" size=\"5\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"client\" name=\"c".$x."-datalen\" size=\"5\" value=\"NULL\"></td>
+		<td><input type=\"text\" side=\"client\" name=\"c".$x."-sn\" size=\"5\" ></td>
+		<td><input type=\"text\" side=\"client\" name=\"c".$x."-an\" size=\"5\" ></td>
+		<td><input type=\"text\" side=\"client\" name=\"c".$x."-syn\" size=\"1\" ></td>
+		<td><input type=\"text\" side=\"client\" name=\"c".$x."-ack\" size=\"1\" ></td>
+		<td><input type=\"text\" side=\"client\" name=\"c".$x."-fin\" size=\"1\" ></td>
+		<td><input type=\"text\" side=\"client\" name=\"c".$x."-w\" size=\"5\" ></td>
+		<td><input type=\"text\" side=\"client\" name=\"c".$x."-mss\" size=\"5\" ></td>
+		<td><input type=\"text\" side=\"client\" name=\"c".$x."-datalen\" size=\"5\" ></td>
 		<td class=\"ticktemplate\"></td>
-		<td><input type=\"text\" side=\"server\" name=\"s".$x."-sn\" size=\"5\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"server\" name=\"s".$x."-an\" size=\"5\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"server\" name=\"s".$x."-syn\" size=\"1\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"server\" name=\"s".$x."-ack\" size=\"1\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"server\" name=\"s".$x."-fin\" size=\"1\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"server\" name=\"s".$x."-w\" size=\"5\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"server\" name=\"s".$x."-mss\" size=\"5\" value=\"NULL\"></td>
-		<td><input type=\"text\" side=\"server\" name=\"s".$x."-datalen\" size=\"5\" value=\"NULL\"><br></td>
+		<td><input type=\"text\" side=\"server\" name=\"s".$x."-sn\" size=\"5\" ></td>
+		<td><input type=\"text\" side=\"server\" name=\"s".$x."-an\" size=\"5\" ></td>
+		<td><input type=\"text\" side=\"server\" name=\"s".$x."-syn\" size=\"1\" ></td>
+		<td><input type=\"text\" side=\"server\" name=\"s".$x."-ack\" size=\"1\" ></td>
+		<td><input type=\"text\" side=\"server\" name=\"s".$x."-fin\" size=\"1\" ></td>
+		<td><input type=\"text\" side=\"server\" name=\"s".$x."-w\" size=\"5\" ></td>
+		<td><input type=\"text\" side=\"server\" name=\"s".$x."-mss\" size=\"5\" ></td>
+		<td><input type=\"text\" side=\"server\" name=\"s".$x."-datalen\" size=\"5\" ><br></td>
 	</tr>
 ";
 	}
