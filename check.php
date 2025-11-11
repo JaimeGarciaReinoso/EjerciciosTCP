@@ -33,6 +33,8 @@ $ex->execute(array(':eid' => $_POST["ExerciseID"]));
 $arraySeg = array();
 $tic = 1;
 $sender = 0;
+$lang = $_POST["langID"];
+include('locale/'. $lang . '.php');
 
 while ($row = $ex->fetch()){
 	//tic=intval($row->TicID);
@@ -89,7 +91,7 @@ $exerciseIDAux = 0;
 $postArray = array();
 $auxArray = array();
 foreach ($_POST as $key => $val) {
-	if ($exerciseIDAux > 0) {
+	if ($exerciseIDAux > 1) { //Lets escape the first two hidden inputs
 		if ($val == "") {
 			$auxArray[] = "NULL";
 		} else {
@@ -102,7 +104,7 @@ foreach ($_POST as $key => $val) {
 			$aux = 0;
 		}
 	}
-	else $exerciseIDAux = 1;	
+	else $exerciseIDAux=$exerciseIDAux+1;
 }
 
 //echo "Student's answer +++++++++++++++++ <br>";
@@ -195,21 +197,21 @@ while ($ticAux < 15) {
 echo "</tr> </table>";
 
 if ($errors == 0)
-  echo "<h2>¡Felicidades! ¡Tu respuesta es correcta!</h2>";
+  echo $langArray['checkOK'];
 elseif ($errors == 1)
-  echo "<h3>Lo siento, tienes un error. <br>Inténtalo otra vez dándole al botón de ir atrás en tu navegador.</h3>";
+  echo $langArray['check1error'];
 elseif ($errors < 3)
-  echo "<h3>Lo siento, tienes " . $errors . " errores. <br>Inténtalo otra vez dándole al botón de ir atrás en tu navegador.</h3>";
+  echo $langArray['checkXerror1'] . $errors . $langArray['checkXerror2'];
 else
-  echo "<h3>Tienes tres errores o más y por lo tanto no se ha corregido completamente tu respuesta. <br>Inténtalo otra vez dándole al botón de ir atrás en tu navegador.</h3>";
+  echo $langArray['check3error'];
+echo "  <p>
+    <h3>" . $langArray['back'] ."
+      
+  </h3>
+  </p>";
 
 ?>
  
-  <p>
-    <h3>
-      Para volver al índice principal pulsar <a href="index.html">aquí</a>.
-  </h3>
-  </p>
 <script src="tcp.js"></script>
 </body>
 </html>

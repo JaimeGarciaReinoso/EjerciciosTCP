@@ -1,0 +1,118 @@
+<html>
+	<head>
+<style>
+table, th {
+	border: 1px solid black;
+}
+</style>
+<link rel="stylesheet" href="style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</head>
+<body>
+
+ <?php
+
+require __DIR__ . '/credencialesDB.env';
+
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=$db;charset=utf8", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  //echo "Connected successfully<br>";
+} catch(PDOException $e) {
+  echo "Connection to the database failed: " . $e->getMessage();
+}
+
+//$ex stores all SegmentID, sender and tic of the exercise
+$lang = $_GET['langID'] ?? 'es';
+include('locale/'. $lang . '.php');
+
+$id = $_GET['id'];
+$search = "SELECT * FROM EnunTCP WHERE ExerciseID=".$id;
+$ex = $conn->prepare($search);
+$ex->setFetchMode(PDO::FETCH_OBJ);
+$ex->execute();
+$result = $ex->fetch();
+
+echo "<a href=\"form.php?id=".$id."&langID=es\">Español</a> <a href=\"form.php?id=".$id."&langID=en\">English</a>";
+
+echo "<h2> <b>" . $langArray['exercise']. " " .$result->ExerciseNum ." - ". $langArray['part'] . " " .$result->ExercisePart." </b></h2> <p> ";
+
+if ($lang == "es") {
+	echo $result->EnunTextES. " </p>";
+} else {
+	echo $result->EnunTextEN. " </p>";
+}
+
+echo "<form action=\"check.php\" method=\"POST\">
+	<input type=\"hidden\" id=\"ExerciseID\" name=\"ExerciseID\" value=\"" . $id . "\">
+	<input type=\"hidden\" id=\"langID\" name=\"langID\" value=\"" . $lang . "\">
+
+<table>
+	<tr class=\"header-row\">
+		<th class=\"top-header\" colspan=\"8\">Client</th>
+		<td></td>
+		<th class=\"top-header\" colspan=\"8\">Server</th>
+	</tr>
+	<tr>
+		<th class=\"bottom-header\">SN</th>
+		<th class=\"bottom-header\">AN</th>
+		<th class=\"bottom-header\">SYN</th>
+		<th class=\"bottom-header\">ACK</th>
+		<th class=\"bottom-header\">FIN</th>
+		<th class=\"bottom-header\">W</th>
+		<th class=\"bottom-header\">MSS</th>
+		<th class=\"bottom-header\">Data Len</th>
+		<td></td>
+		<th class=\"bottom-header\">SN</th>
+		<th class=\"bottom-header\">AN</th>
+		<th class=\"bottom-header\">SYN</th>
+		<th class=\"bottom-header\">ACK</th>
+		<th class=\"bottom-header\">FIN</th>
+		<th class=\"bottom-header\">W</th>
+		<th class=\"bottom-header\">MSS</th>
+		<th class=\"bottom-header\">Data Len</th>
+	</tr>
+";
+
+	for ($x=1;$x<=15;$x++) {
+
+
+			// Regla para números (vacío o cualquier dígito) -> Se usa en MSS
+      $num_pattern = "pattern=\"[0-9]*\" title=\"Solo números o vacío\"";
+        
+      // Regla para bits (vacío, 0, o 1)
+      $bit_pattern = "pattern=\"[01]?\" title=\"Solo 0, 1 o vacío\"";
+			
+			echo "
+	<tr>
+		<td><input type=\"text\" $num_pattern side=\"client\" name=\"c".$x."-sn\" size=\"5\" ></td>
+		<td><input type=\"text\" $num_pattern side=\"client\" name=\"c".$x."-an\" size=\"5\" ></td>
+		<td><input type=\"text\" $bit_pattern side=\"client\" name=\"c".$x."-syn\" size=\"1\" ></td>
+		<td><input type=\"text\" $bit_pattern side=\"client\" name=\"c".$x."-ack\" size=\"1\" ></td>
+		<td><input type=\"text\" $bit_pattern side=\"client\" name=\"c".$x."-fin\" size=\"1\" ></td>
+		<td><input type=\"text\" $num_pattern side=\"client\" name=\"c".$x."-w\" size=\"5\" ></td>
+		<td><input type=\"text\" $num_pattern side=\"client\" name=\"c".$x."-mss\" size=\"5\" ></td> 
+		<td><input type=\"text\" $num_pattern side=\"client\" name=\"c".$x."-datalen\" size=\"5\" ></td>
+		<td class=\"ticktemplate\"></td>
+		<td><input type=\"text\" $num_pattern side=\"server\" name=\"s".$x."-sn\" size=\"5\" ></td>
+		<td><input type=\"text\" $num_pattern side=\"server\" name=\"s".$x."-an\" size=\"5\" ></td>
+		<td><input type=\"text\" $bit_pattern side=\"server\" name=\"s".$x."-syn\" size=\"1\" ></td>
+		<td><input type=\"text\" $bit_pattern side=\"server\" name=\"s".$x."-ack\" size=\"1\" ></td>
+		<td><input type=\"text\" $bit_pattern side=\"server\" name=\"s".$x."-fin\" size=\"1\" ></td>
+		<td><input type=\"text\" $num_pattern side=\"server\" name=\"s".$x."-w\" size=\"5\" ></td>
+		<td><input type=\"text\" $num_pattern side=\"server\" name=\"s".$x."-mss\" size=\"5\" >
+		</td> <td><input type=\"text\" $num_pattern side=\"server\" name=\"s".$x."-datalen\" size=\"5\" ><br></td>
+	</tr>
+";
+	}
+?>
+
+<input type="submit">
+</form>
+
+</table>
+<script src="tcp.js"></script>
+</body>
+</html>
+

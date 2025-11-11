@@ -7,23 +7,12 @@
 </head>
 <body>
 
-
-<form name="langSelect" action="" method="get">
-     <select name="langID" id="langID">
-         <option>Select Language</option>
-         <option value="en">English</option>
-         <option value="es">Spanish</option>
-    </select>
-
-    <br><br>
-
-    <button type="submit">Submit</button>
-</form>
-
+<a href="index.php?langID=es">Español</a>
+<a href="index.php?langID=en">English</a>
 
 <?php
 
-       $lang = $_GET['langID'] ?? 'en';
+       $lang = $_GET['langID'] ?? 'es';
 
         include('locale/'. $lang . '.php');
 

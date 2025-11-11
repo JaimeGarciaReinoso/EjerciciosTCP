@@ -25,26 +25,26 @@
       <ul>
       <li>Exercise 1 - Easy Level</li>
         <ul>
-          <li><a href=\"form1-English.html\">Part 1</a></li>
-          <li><a href=\"form2-English.html\">Part 2</a></li>
-          <li><a href=\"form3-English.html\">Part 3</a></li>
-          <li><a href=\"form4-English.html\">Part 4</a></li>
-          <li><a href=\"form5-English.html\">Part 5</a></li>
-          <li><a href=\"form6-English.html\">Part 6</a></li>
+          <li><a href=\"form.php?langID=en&id=1\">Part 1</a></li>
+          <li><a href=\"form.php?langID=en&id=2\">Part 2</a></li>
+          <li><a href=\"form.php?langID=en&id=3\">Part 3</a></li>
+          <li><a href=\"form.php?langID=en&id=4\">Part 4</a></li>
+          <li><a href=\"form.php?langID=en&id=5\">Part 5</a></li>
+          <li><a href=\"form.php?langID=en&id=6\">Part 6</a></li>
         </ul>
       <li>Exercise 2 - Medium Level (Exercise 1 of the PP3 course for the 2023-24 academic year)</li>
         <ul>
-          <li><a href=\"form_2-1-English.html\">Part 1</a></li>
-          <li><a href=\"form_2-2-English.html\">Part 2</a></li>
-          <li><a href=\"form_2-3-English.html\">Part 3</a></li>
-          <li><a href=\"form_2-4-English.html\">Part 4</a></li>
+          <li><a href=\"form.php?langID=en&id=7\">Part 1</a></li>
+          <li><a href=\"form.php?langID=en&id=8\">Part 2</a></li>
+          <li><a href=\"form.php?langID=en&id=9\">Part 3</a></li>
+          <li><a href=\"form.php?langID=en&id=10\">Part 4</a></li>
         </ul>
       <li>Exercise 3 - Medium Level (Exercise 1 of the PEI2 course for the 2022-23 academic year)</li>
         <ul>
-          <li><a href=\"form_3-1-English.html\">Part 1</a></li>
-          <li><a href=\"form_3-2-English.html\">Part 2</a></li>
-          <li><a href=\"form_3-3-English.html\">Part 3</a></li>
-          <li><a href=\"form_3-4-English.html\">Part 4</a></li>
+          <li><a href=\"form.php?langID=en&id=11\">Part 1</a></li>
+          <li><a href=\"form.php?langID=en&id=12\">Part 2</a></li>
+          <li><a href=\"form.php?langID=en&id=13\">Part 3</a></li>
+          <li><a href=\"form.php?langID=en&id=14\">Part 4</a></li>
         </ul>
     </ul>
 
@@ -53,19 +53,29 @@
     <ul>
       <li>Exercise 4 - Hard Level</li>
         <ul>
-          <li><a href=\"form_4-1-English.html\">Part 1</a></li>
-          <li><a href=\"form_4-2-English.html\">Part 2</a></li>
-          <li><a href=\"form_4-3-English.html\">Part 3</a></li>
-          <li><a href=\"form_4-4-English.html\">Part 4</a></li>
-          <li><a href=\"form_4-5-English.html\">Part 5</a></li>
+          <li><a href=\"form.php?langID=en&id=15\">Part 1</a></li>
+          <li><a href=\"form.php?langID=en&id=16\">Part 2</a></li>
+          <li><a href=\"form.php?langID=en&id=17\">Part 3</a></li>
+          <li><a href=\"form.php?langID=en&id=18\">Part 4</a></li>
+          <li><a href=\"form.php?langID=en&id=19\">Part 5</a></li>
         </ul>
       <li>Exercise 5 - Network Architecture god Level (HTTP+TCP with congestion control for the Architecture of Computer Networks I course)</li>
         <ul>
-          <li><a href=\"form_5-1-English.html\">Part 1</a></li>
-          <li><a href=\"form_5-2-English.html\">Part 2</a></li>
-          <li><a href=\"form_5-3-English.html\">Part 3</a></li>
-          <li><a href=\"form_5-4-English.html\">Part 4</a></li>
+          <li><a href=\"form.php?langID=en&id=20\">Part 1</a></li>
+          <li><a href=\"form.php?langID=en&id=21\">Part 2</a></li>
+          <li><a href=\"form.php?langID=en&id=22\">Part 3</a></li>
+          <li><a href=\"form.php?langID=en&id=23\">Part 4</a></li>
         </ul>
     </ul>",
+    'exercise' => "Exercise",
+    'part' => "Part",
+    'checkOK' => "<h2>Congratulations! Everything is correct!</h2>",
+ 	"check1error" => "<h3>Sorry, there is one error. <br>Try it again by clicking the back button in your browser.</h3>",
+    'checkXerror1' => "<h3>Sorry, you have ",
+    'checkXerror2' => " error(s). <br>Try it again going back to the previous screen.</h3>",
+    'check3error' => "<h3>You have three or more errors, so your answer is not completely reviewed. <br>Try it again going back to the previous screen.</h3>",
+    'back' => "To go back to the main page click <a href=\"index.php\">here</a>",
+
+
    );
 ?>

@@ -24,26 +24,26 @@
 		<ul>
 			<li>Ejercicio 1 - Nivel fácil</li>
 				<ul>
-					<li><a href=\"form.php?id=1\">Parte 1</a></li>
-					<li><a href=\"form.php?id=2\">Parte 2</a></li>
-					<li><a href=\"form.php?id=3\">Parte 3</a></li>
-					<li><a href=\"form.php?id=4\">Parte 4</a></li>
-					<li><a href=\"form.php?id=5\">Parte 5</a></li>
-                  <li><a href=\"form.php?id=6\">Parte 6</a></li>
+					<li><a href=\"form.php?langID=es&id=1\">Parte 1</a></li>
+					<li><a href=\"form.php?langID=es&id=2\">Parte 2</a></li>
+					<li><a href=\"form.php?langID=es&id=3\">Parte 3</a></li>
+					<li><a href=\"form.php?langID=es&id=4\">Parte 4</a></li>
+					<li><a href=\"form.php?langID=es&id=5\">Parte 5</a></li>
+                  <li><a href=\"form.php?langID=es&id=6\">Parte 6</a></li>
 				</ul>
 			<li>Ejercicio 2 - Nivel medio (Ejercicio 1 de la PP3 del curso 2023-24)</li>
           		<ul>
-          			<li><a href=\"form.php?id=7\">Parte 1</a></li>
-                  <li><a href=\"form.php?id=8\">Parte 2</a></li>
-                  <li><a href=\"form.php?id=9\">Parte 3</a></li>
-                  <li><a href=\"form.php?id=10\">Parte 4</a></li>
+          			<li><a href=\"form.php?langID=es&id=7\">Parte 1</a></li>
+                  <li><a href=\"form.php?langID=es&id=8\">Parte 2</a></li>
+                  <li><a href=\"form.php?langID=es&id=9\">Parte 3</a></li>
+                  <li><a href=\"form.php?langID=es&id=10\">Parte 4</a></li>
                 </ul>
           <li>Ejercicio 3 - Nivel medio (Ejercicio 1 de la PEI2 del curso 2022-23)</li>
           		<ul>
-                    <li><a href=\"form.php?id=11\">Parte 1</a></li>
-                    <li><a href=\"form.php?id=12\">Parte 2</a></li>
-                    <li><a href=\"form.php?id=13\">Parte 3</a></li>
-                    <li><a href=\"form.php?id=14\">Parte 4</a></li>                
+                    <li><a href=\"form.php?langID=es&id=11\">Parte 1</a></li>
+                    <li><a href=\"form.php?langID=es&id=12\">Parte 2</a></li>
+                    <li><a href=\"form.php?langID=es&id=13\">Parte 3</a></li>
+                    <li><a href=\"form.php?langID=es&id=14\">Parte 4</a></li>                
           		</ul>
 		</ul>
         
@@ -52,19 +52,19 @@
 		<ul>
 			<li>Ejercicio 4 - Nivel difícil </li>
 				<ul>
-					<li><a href=\"form.php?id=15\">Parte 1</a></li>
-					<li><a href=\"form.php?id=16\">Parte 2</a></li>
-					<li><a href=\"form.php?id=17\">Parte 3</a></li>
-					<li><a href=\"form.php?id=18\">Parte 4</a></li>
-					<li><a href=\"form.php?id=19\">Parte 5</a></li>
+					<li><a href=\"form.php?langID=es&id=15\">Parte 1</a></li>
+					<li><a href=\"form.php?langID=es&id=16\">Parte 2</a></li>
+					<li><a href=\"form.php?langID=es&id=17\">Parte 3</a></li>
+					<li><a href=\"form.php?langID=es&id=18\">Parte 4</a></li>
+					<li><a href=\"form.php?langID=es&id=19\">Parte 5</a></li>
               
           		</ul>
           <li>Ejercicio 5 - Nivel dios de Arquitectura de Redes I (HTTP+TCP con control de congestión)</li>
           	<ul>
-					<li><a href=\"form.php?id=20\">Parte 1</a></li>
-					<li><a href=\"form.php?id=21\">Parte 2</a></li>
-					<li><a href=\"form.php?id=22\">Parte 3</a></li>
-					<li><a href=\"form.php?id=23\">Parte 4</a></li>
+					<li><a href=\"form.php?langID=es&id=20\">Parte 1</a></li>
+					<li><a href=\"form.php?langID=es&id=21\">Parte 2</a></li>
+					<li><a href=\"form.php?langID=es&id=22\">Parte 3</a></li>
+					<li><a href=\"form.php?langID=es&id=23\">Parte 4</a></li>
             
           	</ul>
         </ul>
@@ -77,6 +77,15 @@
 			  <li>Luis de la Cruz Piris: ideas de mejora.</li>
 			  <li>Joaquín Álvarez Horcajo: pruebas.</li>
 		  </ul>",
+	"exercise" => "Ejercicio",
+	"part" => "Parte",
+  	"checkOK" => "<h2>¡Felicidades! ¡Tu respuesta es correcta!</h2>",
+ 	"check1error" => "<h3>Lo siento, tienes un error. <br>Inténtalo otra vez dándole al botón de ir atrás en tu navegador.</h3>",
+	"checkXerror1" => "<h3>Lo siento, tienes ",
+	"checkXerror2" => " errores. <br>Inténtalo otra vez dándole al botón de ir atrás en tu navegador.</h3>",
+ 	"check3error" => "<h3>Tienes tres errores o más y por lo tanto no se ha corregido completamente tu respuesta. <br>Inténtalo otra vez dándole al botón de ir atrás en tu navegador.</h3>",
+	"back" => "Para volver al índice principal pulsar <a href=\"index.php\">aquí</a>.",
+
 
    );
 
