@@ -24,14 +24,24 @@ try {
 }
 
 //$ex stores all SegmentID, sender and tic of the exercise
+
+// SECURITY: lang must be a valid language
+$allowed_langs = ['es', 'en'];
 $lang = $_GET['langID'] ?? 'es';
+
+if (!in_array($lang, $allowed_langs)) {
+    $lang = 'es';
+}
+
 include('locale/'. $lang . '.php');
 
-$id = $_GET['id'];
-$search = "SELECT * FROM EnunTCP WHERE ExerciseID=".$id;
+// SECURITY: id must be an integer
+$id = (int) ($_GET['id'] ?? 0);
+
+$search = "SELECT * FROM EnunTCP WHERE ExerciseID= :id";
 $ex = $conn->prepare($search);
 $ex->setFetchMode(PDO::FETCH_OBJ);
-$ex->execute();
+$ex->execute(array(':id' => $_GET["id"]));
 $result = $ex->fetch();
 
 echo "<a href=\"form.php?id=".$id."&langID=es\">Español</a> <a href=\"form.php?id=".$id."&langID=en\">English</a>";
@@ -115,4 +125,5 @@ echo "<form action=\"check.php\" method=\"POST\">
 <script src="tcp.js"></script>
 </body>
 </html>
+
 
