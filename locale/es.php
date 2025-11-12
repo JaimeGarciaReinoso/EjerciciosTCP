@@ -12,7 +12,6 @@
 			  <li>Una vez enviada tu respuesta, se marca en verde los campos correctos y en rojo los incorrectos. Si tienes tres errores o más, se dejará de corregir la respuesta y se marcará en amarillo las respuestas no corregidas.</li>
 			  <li>Si tienes algún error, se recomienda darle al botón de \"atrás\" de tu navegador y corregir los campos incorrectos.</li>
 			  <li>Recuerda que tienes el Mapa Mental Aumentado de TCP <a href=\"https://mapamentalar1.web.uah.es/02-canvas/tcp.html\">aquí</a> por si algo no te queda claro.</li>
-			  <li>Hay una versión en inglés <a href=\"English/index.html\">aquí</a></li>
 			</ol>
 
 
