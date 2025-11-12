@@ -12,7 +12,13 @@
 
 <?php
 
-       $lang = $_GET['langID'] ?? 'es';
+       // SECURITY: lang must be a valid language
+		  $allowed_langs = ['es', 'en'];
+		  $lang = $_GET['langID'] ?? 'es';
+
+		  if (!in_array($lang, $allowed_langs)) {
+    		$lang = 'es';
+		  }
 
         include('locale/'. $lang . '.php');
 
