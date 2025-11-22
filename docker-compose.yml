@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web:
+    image: php:8.0-apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=tcp_exercises
+      - DB_USER=user
+      - DB_PASS=password
+    command: sh -c "docker-php-ext-install pdo pdo_mysql && apache2-foreground"
+
+  db:
+    image: mariadb:10.6
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: tcp_exercises
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
