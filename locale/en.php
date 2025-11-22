@@ -15,7 +15,7 @@ $langArray = array(
 
     "authors" => "<h3>Authors</h3><ul>
       <li>      Jaime García Reinoso: original idea and basic functionality implementation.</li>
-      <li>Enrique de la Hoz de la Hoz: improvement ideas and security.</li>
+      <li>Enrique de la Hoz de la Hoz: congestion control implementation, admin environment, improvement ideas and security.</li>
       <li>Marino Tejedor Romero: improvement ideas, javascript, CSS and testing</li>
       <li>Luis de la Cruz Piris: improvement ideas.</li>
       <li>Joaquín Álvarez Horcajo: testing.</li></ul>",
