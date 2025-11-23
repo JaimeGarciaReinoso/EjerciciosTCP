@@ -2,14 +2,16 @@
 
 $langArray = array(
 
-  "header" => "<h2>TCP Exercises</h2>",
-  "notes" => "<h3>Important Notes:</h3>
+    "header" => "TCP Exercises",
+    "notes" => "<h3>Important Notes:</h3>
   <ol>
     <li>This website is in a testing phase and may contain errors. If any error is detected, please send an email to <a href=\"mailto:jaime.garciareinoso@uah.es\">jaime.garciareinoso@uah.es</a></li>
     <li>It is recommended to complete the exercise on paper and then pass it through the exercise form.</li>
     <li>If a field in the TCP header is not sent in a segment, leave the field empty.</li>
     <li>Once you submit your response, the correct fields will be marked green and incorrect fields red. If you have three or more errors, the correction of your response will stop and uncorrected responses will be marked yellow.</li>
     <li>If you have any error, it is recommended to click on the  \"back\" button in your browser and correct the incorrect fields.</li>
+    <li>In the exercises with congestion control, only fill in the CWND and Mode values when any of them change.</li>
+    <li>The format of these exercises may not be related to that of the exams.</li>
     <li>Remember that you have the Enhanced Mental Map of TCP <a href=\"https://mapamentalar1.web.uah.es/02-canvas/tcp-English.html\">here</a> if anything remains unclear.</li>
   </ol>",
 
@@ -92,22 +94,23 @@ $langArray = array(
   'check3error' => "<h3>You have three or more errors, so your answer is not completely reviewed. <br>Try it again going back to the previous screen.</h3>",
   'back' => "To go back to the main page click <a href=\"index.php\">here</a>",
 
-  // --- MENU KEYS ---
-  "ex_no_congestion_title" => "TCP Exercises without congestion control",
-  "ex_1_title" => "Exercise 1 - Easy Level",
-  "ex_2_title" => "Exercise 2 - Medium Level (Exercise 1 of the PP3 course for the 2023-24 academic year)",
-  "ex_3_title" => "Exercise 3 - Medium Level (Exercise 1 of the PEI2 course for the 2022-23 academic year)",
-  "ex_7_title" => "Exercise 6 - Medium Level (GP3.4)",
-  "ex_8_title" => "Exercise 7 - Medium Level (Exercise 1 of the PEI2 course for the 2024-25 academic year)",
-  "ex_with_congestion_title" => "TCP Exercises with congestion control",
-  "ex_4_title" => "Exercise 4 - Hard Level",
-  "ex_5_title" => "Exercise 5 - Network Architecture God Level (HTTP+TCP with congestion control)",
+    "part" => "Part",
+    "exercise" => "Exercise",
+    "ex_no_congestion_title" => "Exercises WITHOUT congestion control",
+    "ex_1_title" => "Exercise 1 - Easy level",
+    "ex_2_title" => "Exercise 2 - Medium level (Exercise 1 from PP3 course 2023-24)",
+    "ex_3_title" => "Exercise 3 - Medium level (Exercise 1 from PEI2 course 2022-23)",
+    "ex_7_title" => "Exercise 6 - Medium level (GP3.4)",
+    "ex_8_title" => "Exercise 7 -=> Medium level (Exercise 1 from PEI2 course 2024-25)",
+    "ex_with_congestion_title" => "Exercises WITH congestion control",
+    "ex_4_title" => "Exercise 4 - Hard level",
+    "ex_5_title" => "Exercise 5 - Network Architecture god Level (HTTP+TCP from the Architecture of Computer Networks I course)",
 
-  // --- RESULTS ---
-  "correct_answer" => "Congratulations! Everything is correct!",
-  "one_error" => "Sorry, there is one error. <br>Try it again by clicking the back button in your browser.",
-  "n_errors" => "Sorry, you have {n} error(s). <br>Try it again going back to the previous screen.",
-  "many_errors" => "You have three or more errors, so your answer is not completely reviewed. <br>Try it again going back to the previous screen.",
-  "back_to_index" => "Back to index",
+    // --- RESULTS ---
+    "correct_answer" => "Congratulations! Everything is correct!",
+    "one_error" => "Sorry, there is one error. <br>Try it again by clicking the back button in your browser.",
+    "n_errors" => "Sorry, you have {n} error(s). <br>Try it again going back to the previous screen.",
+    "many_errors" => "You have three or more errors, so your answer is not completely reviewed. <br>Try it again going back to the previous screen.",
+    "back_to_index" => "Back to index",
 );
 ?>

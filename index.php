@@ -16,7 +16,7 @@ if ($lang == 'en') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios TCP</title>
+    <?php echo "<title>". $langArray['header'] . "</title>"; ?>
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
 
@@ -24,7 +24,7 @@ if ($lang == 'en') {
 
     <nav class="navbar">
         <div class="nav-content">
-            <h1>TCP Exercises</h1>
+            <?php echo "<h1>". $langArray['header'] . "</h1>"; ?>
             <div class="lang-switch">
                 <a href="index.php?langID=es" class="<?php echo $lang == 'es' ? 'active' : ''; ?>">ES</a> |
                 <a href="index.php?langID=en" class="<?php echo $lang == 'en' ? 'active' : ''; ?>">EN</a>
@@ -35,7 +35,7 @@ if ($lang == 'en') {
     <div class="container">
         <div class="card">
             <div class="header-section">
-                <?php echo $langArray['header']; ?>
+                <?php echo "<h2>" . $langArray['header'] . "</h2>"; ?>
             </div>
 
             <div class="notes-section">
