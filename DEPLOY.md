@@ -71,15 +71,21 @@ $db = "tcp_exercises"; // El nombre de la base de datos que creaste
 ?>
 ```
 
-## Paso 4: Configurar Contraseña de Administrador
+## Paso 4: Crear Usuario Administrador
 
-1.  Por seguridad, el archivo `admin/login.php` viene con un hash de contraseña falso. Debes generar uno nuevo.
-2.  Ejecuta este comando en tu terminal (o usa una herramienta online de BCrypt) para generar el hash de tu contraseña deseada:
+El sistema de autenticación utiliza usuarios en la base de datos. Debes crear el primer usuario manualmente.
+
+1.  Genera el hash de tu contraseña deseada ejecutando este comando en tu terminal:
     ```bash
-    php -r 'echo password_hash("TU_CONTRASEÑA_AQUI", PASSWORD_BCRYPT, ["cost" => 12]);'
+    php -r 'echo password_hash("TU_CONTRASEÑA_AQUI", PASSWORD_BCRYPT);'
     ```
-3.  Copia el hash resultante (empieza por `$2y$12$...`).
-4.  Edita el archivo `admin/login.php` en tu servidor y reemplaza `CHANGE_THIS_HASH_IN_PRODUCTION` con tu nuevo hash.
+2.  Copia el hash resultante (empieza por `$2y$...`).
+3.  Accede a tu base de datos (vía phpMyAdmin o terminal) y ejecuta el siguiente SQL, sustituyendo los valores:
+    ```sql
+    INSERT INTO Users (username, password_hash) VALUES ('admin', 'TU_HASH_GENERADO_AQUI');
+    ```
+4.  Ahora puedes iniciar sesión en `/admin/login.php` con el usuario `admin` y tu contraseña.
+5.  Una vez dentro, puedes crear más usuarios desde la sección "👥 Usuarios".
 
 ## Paso 5: Verificación
 

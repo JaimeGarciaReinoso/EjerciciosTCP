@@ -241,6 +241,19 @@
 				include("locale/es.php");
 			}
 
+			// Log attempt to ExerciseStats
+			try {
+				$logStmt = $conn->prepare("INSERT INTO ExerciseStats (exercise_id, is_correct, error_count) VALUES (:eid, :correct, :errors)");
+				$logStmt->execute([
+					':eid' => $_POST['ExerciseID'],
+					':correct' => ($errors == 0 ? 1 : 0),
+					':errors' => $errors
+				]);
+			} catch (PDOException $e) {
+				// Silently fail logging to not disrupt user experience
+				// error_log("Failed to log stats: " . $e->getMessage());
+			}
+
 			echo "<div style='margin-top: 2rem;'>";
 			if ($errors == 0)
 				echo "<div class='result-banner result-success'><h2>" . $langArray['correct_answer'] . "</h2></div>";

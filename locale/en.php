@@ -15,13 +15,13 @@ $langArray = array(
     <li>Remember that you have the Enhanced Mental Map of TCP <a href=\"https://mapamentalar1.web.uah.es/02-canvas/tcp-English.html\">here</a> if anything remains unclear.</li>
   </ol>",
 
-    "authors" => "<h3>Authors</h3><ul>
+  "authors" => "<h3>Authors</h3><ul>
       <li>      Jaime García Reinoso: original idea and basic functionality implementation.</li>
       <li>Enrique de la Hoz de la Hoz: congestion control implementation, admin environment, improvement ideas and security.</li>
       <li>Marino Tejedor Romero: improvement ideas, javascript, CSS and testing</li>
       <li>Luis de la Cruz Piris: improvement ideas.</li>
       <li>Joaquín Álvarez Horcajo: testing.</li></ul>",
-    "enun" => "<ul>
+  "enun" => "<ul>
     <li>TCP Exercises without congestion control</li>
       <ul>
       <li>Exercise 1 - Easy Level</li>
@@ -85,14 +85,14 @@ $langArray = array(
           <li><a href=\"form.php?langID=en&id=23\">Part 4</a></li>
         </ul>
     </ul>",
-    'exercise' => "Exercise",
-    'part' => "Part",
-    'checkOK' => "<h2>Congratulations! Everything is correct!</h2>",
-    "check1error" => "<h3>Sorry, there is one error. <br>Try it again by clicking the back button in your browser.</h3>",
-    'checkXerror1' => "<h3>Sorry, you have ",
-    'checkXerror2' => " error(s). <br>Try it again going back to the previous screen.</h3>",
-    'check3error' => "<h3>You have three or more errors, so your answer is not completely reviewed. <br>Try it again going back to the previous screen.</h3>",
-    'back' => "To go back to the main page click <a href=\"index.php\">here</a>",
+  'exercise' => "Exercise",
+  'part' => "Part",
+  'checkOK' => "<h2>Congratulations! Everything is correct!</h2>",
+  "check1error" => "<h3>Sorry, there is one error. <br>Try it again by clicking the back button in your browser.</h3>",
+  'checkXerror1' => "<h3>Sorry, you have ",
+  'checkXerror2' => " error(s). <br>Try it again going back to the previous screen.</h3>",
+  'check3error' => "<h3>You have three or more errors, so your answer is not completely reviewed. <br>Try it again going back to the previous screen.</h3>",
+  'back' => "To go back to the main page click <a href=\"index.php\">here</a>",
 
     "part" => "Part",
     "exercise" => "Exercise",

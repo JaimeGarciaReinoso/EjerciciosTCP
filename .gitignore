@@ -1,0 +1,19 @@
+# Development files
+SolucionesBBDD/
+.docker/
+.DS_Store
+.env
+credencialesDB.env
+
+# Private Data
+dump_full_db.sql
+private_data.sql
+restore_data.sql
+import_data.sql
+*.log
+
+# Legacy
+Web-English/
+Web-Spanish/
+form*.html
+index_old.html

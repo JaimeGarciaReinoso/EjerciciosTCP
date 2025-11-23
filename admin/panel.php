@@ -77,12 +77,19 @@ if (!$modo_edicion_enunciado) {
 <head>
     <title>Panel Admin</title>
     <link rel="stylesheet" href="../style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
     <div class="panel-container">
         <div class="panel-header">
-            <h2>Panel de Administración</h2><a href="logout.php">Cerrar Sesión</a>
+            <h2>Panel de Administración</h2>
+            <div class="admin-nav">
+                <a href="stats.php" class="nav-link">📊 Estadísticas</a>
+                <a href="users.php" class="nav-link">👥 Usuarios</a>
+                <a href="change_password.php" class="nav-link">🔑 Cambiar Contraseña</a>
+                <a href="logout.php" class="nav-link logout">Cerrar Sesión</a>
+            </div>
         </div>
         <?php if ($mensaje): ?>
             <p class="mensaje"><?php echo htmlspecialchars($mensaje); ?></p><?php endif; ?>
@@ -101,111 +108,146 @@ if (!$modo_edicion_enunciado) {
                         rows="10"><?php echo htmlspecialchars($ejercicio_a_editar['EnunTextES']); ?></textarea>
                     <label>Texto (EN):</label><textarea name="EnunTextEN"
                         rows="10"><?php echo htmlspecialchars($ejercicio_a_editar['EnunTextEN']); ?></textarea>
-                    <label><input type="checkbox" name="congestion_control" <?php if ($ejercicio_a_editar['congestion_control']) echo 'checked'; ?>> Tiene Control de Congestión</label>
+                    <label><input type="checkbox" name="congestion_control" <?php if ($ejercicio_a_editar['congestion_control'])
+                        echo 'checked'; ?>> Tiene Control de
+                        Congestión</label>
                     <button type="submit">Guardar</button><a href="panel.php" class="btn-cancel">Cancelar</a>
                 </form>
             </div>
         <?php elseif (!$modo_edicion_enunciado): ?>
 
             <div class="admin-form">
-                <h3>Gestionar Menú</h3>
-                <div class="table-wrapper">
-                    <table class="item-table">
-                        <thead>
-                            <tr>
-                                <th>Orden</th>
-                                <th>Tipo</th>
-                                <th>Clave</th>
-                                <th>Texto (ES)</th>
-                                <th>ID Link</th>
-                                <th>Hab.</th>
-                                <th>Acciones</th>
-                                <th>Enunciado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($items_menu as $i):
-                                $txt = isset($langArray_es[$i['clave_idioma']]) ? strip_tags($langArray_es[$i['clave_idioma']]) : '<span class="text-error">!CLAVE?</span>';
-                                ?>
-                                <form method="POST">
-                                    <input type="hidden" name="item_id" value="<?php echo $i['id']; ?>">
-                                    <tr>
-                                        <td><input type="number" name="orden" value="<?php echo $i['orden']; ?>"
-                                                class="input-small"></td>
-                                        <td><?php echo $i['tipo']; ?></td>
-                                        <td><input type="text" name="clave_idioma" value="<?php echo $i['clave_idioma']; ?>">
-                                        </td>
-                                        <td class="text-preview"><?php echo $txt; ?></td>
-                                        <td><input type="number" name="link_id" value="<?php echo $i['link_id']; ?>"
-                                                class="input-small"></td>
-                                        <td><input type="checkbox" name="habilitado" <?php if ($i['habilitado'])
-                                            echo 'checked'; ?>></td>
-                                        <td><button type="submit" name="update_item_menu" class="btn-update">OK</button><button
-                                                type="submit" name="delete_item_menu" class="btn-delete"
-                                                onclick="return confirm('¿Borrar?');">X</button></td>
-                                        <td><?php if ($i['tipo'] == 'parte' && $i['link_id']): ?><a
-                                                    href="panel.php?editar_id=<?php echo $i['link_id']; ?>"
-                                                    class="btn-edit">Editar</a><?php else: ?>-<?php endif; ?></td>
-                                    </tr>
-                                    <input type="hidden" name="part_num" value="<?php echo $i['part_num']; ?>">
-                                </form>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                <h3 class="collapsible-header">Gestionar Menú <span class="toggle-icon">+</span></h3>
+                <div class="collapsible-content collapsed">
+                    <div class="table-wrapper">
+                        <table class="item-table">
+                            <thead>
+                                <tr>
+                                    <th>Orden</th>
+                                    <th>Tipo</th>
+                                    <th>Clave</th>
+                                    <th>Texto (ES)</th>
+                                    <th>ID Link</th>
+                                    <th>Hab.</th>
+                                    <th>Acciones</th>
+                                    <th>Enunciado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($items_menu as $i):
+                                    $txt = isset($langArray_es[$i['clave_idioma']]) ? strip_tags($langArray_es[$i['clave_idioma']]) : '<span class="text-error">!CLAVE?</span>';
+                                    ?>
+                                    <form method="POST">
+                                        <input type="hidden" name="item_id" value="<?php echo $i['id']; ?>">
+                                        <tr>
+                                            <td><input type="number" name="orden" value="<?php echo $i['orden']; ?>"
+                                                    class="input-small"></td>
+                                            <td><?php echo $i['tipo']; ?></td>
+                                            <td><input type="text" name="clave_idioma"
+                                                    value="<?php echo $i['clave_idioma']; ?>">
+                                            </td>
+                                            <td class="text-preview"><?php echo $txt; ?></td>
+                                            <td><input type="number" name="link_id" value="<?php echo $i['link_id']; ?>"
+                                                    class="input-small"></td>
+                                            <td><input type="checkbox" name="habilitado" <?php if ($i['habilitado'])
+                                                echo 'checked'; ?>></td>
+                                            <td><button type="submit" name="update_item_menu"
+                                                    class="btn-update">OK</button><button type="submit" name="delete_item_menu"
+                                                    class="btn-delete" onclick="return confirm('¿Borrar?');">X</button></td>
+                                            <td><?php if ($i['tipo'] == 'parte' && $i['link_id']): ?><a
+                                                        href="panel.php?editar_id=<?php echo $i['link_id']; ?>"
+                                                        class="btn-edit">Editar</a><?php else: ?>-<?php endif; ?></td>
+                                        </tr>
+                                        <input type="hidden" name="part_num" value="<?php echo $i['part_num']; ?>">
+                                    </form>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
+
+
             <div class="admin-form">
-                <h3>Gestionar Enunciados (Archivo)</h3>
-                <div class="table-wrapper">
-                    <table class="item-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nº</th>
-                                <th>Parte</th>
-                                <th>Preview</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($items_enunciados as $e): ?>
+                <h3 class="collapsible-header">Gestionar Enunciados (Archivo) <span class="toggle-icon">+</span></h3>
+                <div class="collapsible-content collapsed">
+                    <div class="table-wrapper">
+                        <table class="item-table">
+                            <thead>
                                 <tr>
-                                    <td><?php echo $e['ExerciseID']; ?></td>
-                                    <td><?php echo $e['ExerciseNum']; ?></td>
-                                    <td><?php echo $e['ExercisePart']; ?></td>
-                                    <td class="text-preview">
-                                        <?php echo htmlspecialchars(substr(strip_tags($e['EnunTextES']), 0, 50)); ?>...</td>
-                                    <td><a href="panel.php?editar_id=<?php echo $e['ExerciseID']; ?>"
-                                            class="btn-edit">Editar</a><a
-                                            href="definir_solucion.php?id=<?php echo $e['ExerciseID']; ?>"
-                                            class="btn-solve">Solución</a></td>
+                                    <th>ID</th>
+                                    <th>Nº</th>
+                                    <th>Parte</th>
+                                    <th>Preview</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($items_enunciados as $e): ?>
+                                    <tr>
+                                        <td><?php echo $e['ExerciseID']; ?></td>
+                                        <td><?php echo $e['ExerciseNum']; ?></td>
+                                        <td><?php echo $e['ExercisePart']; ?></td>
+                                        <td class="text-preview">
+                                            <?php echo htmlspecialchars(substr(strip_tags($e['EnunTextES']), 0, 50)); ?>...
+                                        </td>
+                                        <td><a href="panel.php?editar_id=<?php echo $e['ExerciseID']; ?>"
+                                                class="btn-edit">Editar</a><a
+                                                href="definir_solucion.php?id=<?php echo $e['ExerciseID']; ?>"
+                                                class="btn-solve">Solución</a></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
             <form method="POST" class="admin-form">
-                <h3>Añadir Enunciado</h3><input type="hidden" name="add_enunciado" value="1">
-                <label>ID:</label><input type="number" name="ExerciseID" required><label>Nº:</label><input type="number"
-                    name="ExerciseNum" required><label>Parte:</label><input type="number" name="ExercisePart"
-                    required><label><input type="checkbox" name="congestion_control"> Tiene Control de Congestión</label><button type="submit">Añadir</button>
+                <h3 class="collapsible-header">Añadir Enunciado <span class="toggle-icon">+</span></h3>
+                <div class="collapsible-content collapsed">
+                    <input type="hidden" name="add_enunciado" value="1">
+                    <label>ID:</label><input type="number" name="ExerciseID" required>
+                    <label>Nº:</label><input type="number" name="ExerciseNum" required>
+                    <label>Parte:</label><input type="number" name="ExercisePart" required>
+                    <label><input type="checkbox" name="congestion_control"> Tiene Control de Congestión</label>
+                    <button type="submit">Añadir</button>
+                </div>
             </form>
 
             <form method="POST" class="admin-form">
-                <h3>Añadir a Menú</h3><input type="hidden" name="add_menu" value="1">
-                <label>Orden:</label><input type="number" name="orden" required><label>Tipo:</label><select name="tipo">
-                    <option value="parte">Parte</option>
-                    <option value="ejercicio">Ejercicio</option>
-                    <option value="categoria">Categoría</option>
-                </select><label>Clave:</label><input type="text" name="clave_idioma" required><label>Link ID:</label><input
-                    type="number" name="link_id"><label>Nº Parte:</label><input type="number" name="part_num"><button
-                    type="submit">Añadir</button>
+                <h3 class="collapsible-header">Añadir a Menú <span class="toggle-icon">+</span></h3>
+                <div class="collapsible-content collapsed">
+                    <input type="hidden" name="add_menu" value="1">
+                    <label>Orden:</label><input type="number" name="orden" required>
+                    <label>Tipo:</label>
+                    <select name="tipo">
+                        <option value="parte">Parte</option>
+                        <option value="ejercicio">Ejercicio</option>
+                        <option value="categoria">Categoría</option>
+                    </select>
+                    <label>Clave:</label><input type="text" name="clave_idioma" required>
+                    <label>Link ID:</label><input type="number" name="link_id">
+                    <label>Nº Parte:</label><input type="number" name="part_num">
+                    <button type="submit">Añadir</button>
+                </div>
             </form>
         <?php endif; ?>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const headers = document.querySelectorAll('.collapsible-header');
+            headers.forEach(header => {
+                header.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+                    content.classList.toggle('collapsed');
+                    const icon = this.querySelector('.toggle-icon');
+                    icon.textContent = content.classList.contains('collapsed') ? '+' : '-';
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
