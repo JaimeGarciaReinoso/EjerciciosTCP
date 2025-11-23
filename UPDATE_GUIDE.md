@@ -89,7 +89,7 @@ INSERT INTO `Users` (`username`, `password_hash`) VALUES
 ('admin', '$2y$10$ukp51PXm8ua90MqDbpxR/e7ZNwD3pbVk3W10gBGPzgRzKVu9tSi2m');
 ```
 *Nota: El hash de arriba es un ejemplo simplificado. Para generar uno válido para 'admin', use:*
-`$2y$10$e0MYzXyjpJS7Pd0RVvHwHe.i/2.1N.1.1.1.1.1.1.1.1.1.1` (Este no es real, mejor use el generador de PHP o entre con uno generado por usted).
+`$2y$10$ukp51PXm8ua90MqDbpxR/e7ZNwD3pbVk3W10gBGPzgRzKVu9tSi2m` (Hash válido para la contraseña 'admin').
 
 **Mejor opción:** Si tiene acceso a PHP CLI, genere su propio hash:
 ```bash
