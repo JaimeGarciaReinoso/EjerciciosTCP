@@ -145,3 +145,25 @@ CREATE TABLE `menu_ejercicios` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-11-22  5:40:57
+
+-- Table structure for table `ExerciseStats`
+CREATE TABLE IF NOT EXISTS `ExerciseStats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `exercise_id` int(11) NOT NULL,
+  `timestamp` datetime DEFAULT CURRENT_TIMESTAMP,
+  `is_correct` tinyint(1) NOT NULL,
+  `error_count` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `exercise_id` (`exercise_id`),
+  CONSTRAINT `ExerciseStats_ibfk_1` FOREIGN KEY (`exercise_id`) REFERENCES `EnunTCP` (`ExerciseID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table structure for table `Users`
+CREATE TABLE IF NOT EXISTS `Users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
