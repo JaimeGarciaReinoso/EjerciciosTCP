@@ -48,6 +48,35 @@ $dailyStmt = $pdo->prepare($dailySql);
 $dailyStmt->execute($params);
 $dailyStats = $dailyStmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Handle Sorting
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'exercise';
+$order = isset($_GET['order']) && $_GET['order'] === 'asc' ? 'asc' : 'desc';
+
+$allowedSorts = [
+    'exercise' => 'e.ExerciseNum',
+    'part' => 'e.ExercisePart',
+    'attempts' => 'attempts',
+    'correct' => 'correct',
+    'rate' => 'rate',
+    'errors' => 'avg_errors'
+];
+
+if (!array_key_exists($sort, $allowedSorts)) {
+    $sort = 'exercise';
+}
+
+// Determine SQL order
+$sqlOrder = $allowedSorts[$sort];
+if ($sort === 'exercise') {
+    // Secondary sort for exercise
+    $sqlOrder = "e.ExerciseNum $order, e.ExercisePart ASC";
+} elseif ($sort === 'rate') {
+    // Rate is calculated, so we sort by correct/attempts
+    $sqlOrder = "CASE WHEN COUNT(s.id) > 0 THEN SUM(s.is_correct)/COUNT(s.id) ELSE 0 END $order";
+} else {
+    $sqlOrder = "$sqlOrder $order";
+}
+
 // Fetch Attempts by Exercise
 $stmt = $pdo->query("
     SELECT 
@@ -60,9 +89,22 @@ $stmt = $pdo->query("
     FROM EnunTCP e
     LEFT JOIN ExerciseStats s ON e.ExerciseID = s.exercise_id
     GROUP BY e.ExerciseID
-    ORDER BY attempts DESC
+    ORDER BY $sqlOrder
 ");
 $exercises = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Helper function for sort links
+function sortLink($column, $label, $currentSort, $currentOrder)
+{
+    $newOrder = ($currentSort === $column && $currentOrder === 'desc') ? 'asc' : 'desc';
+    $arrow = '';
+    if ($currentSort === $column) {
+        $arrow = $currentOrder === 'asc' ? ' ↑' : ' ↓';
+    }
+    // Preserve filter param
+    $filter = isset($_GET['filter_exercise']) ? '&filter_exercise=' . urlencode($_GET['filter_exercise']) : '';
+    return "<a href=\"?sort=$column&order=$newOrder$filter\" style=\"color: inherit; text-decoration: none;\">$label$arrow</a>";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -146,10 +188,10 @@ $exercises = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         .bar-chart {
             display: flex;
-            align-items: flex-end;
             height: 200px;
             gap: 10px;
             padding-top: 20px;
+            align-items: stretch;
         }
 
         .bar-group {
@@ -158,6 +200,8 @@ $exercises = $stmt->fetchAll(PDO::FETCH_ASSOC);
             align-items: center;
             flex: 1;
             min-width: 40px;
+            height: 100%;
+            justify-content: flex-end;
         }
 
         .bar {
@@ -178,18 +222,20 @@ $exercises = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         .bar-wrapper {
             width: 30px;
-            height: 100%;
+            height: 80%;
             position: relative;
             display: flex;
             align-items: flex-end;
         }
 
         .bar-label {
-            margin-top: 10px;
+            height: 30px;
+            margin-top: 5px;
             font-size: 0.7em;
             color: #7f8c8d;
             transform: rotate(-45deg);
             white-space: nowrap;
+            text-align: center;
         }
 
         .cleanup-section {
@@ -257,7 +303,8 @@ $exercises = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h3>Actividad Diaria (Últimos 30 días)</h3>
             <form method="GET" style="display: flex; gap: 10px; align-items: center;">
                 <label>Filtrar por:</label>
-                <select name="filter_exercise" onchange="this.form.submit()" style="padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
+                <select name="filter_exercise" onchange="this.form.submit()"
+                    style="padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
                     <option value="all">Todos los ejercicios</option>
                     <?php foreach ($exercises as $ex): ?>
                         <option value="<?php echo $ex['ExerciseID']; ?>" <?php echo $filterExerciseId == $ex['ExerciseID'] ? 'selected' : ''; ?>>
@@ -304,12 +351,12 @@ $exercises = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <table class="data-table">
             <thead>
                 <tr>
-                    <th>Ejercicio</th>
-                    <th>Parte</th>
-                    <th>Intentos</th>
-                    <th>Correctos</th>
-                    <th>Tasa Éxito</th>
-                    <th>Errores (Media)</th>
+                    <th><?php echo sortLink('exercise', 'Ejercicio', $sort, $order); ?></th>
+                    <th><?php echo sortLink('part', 'Parte', $sort, $order); ?></th>
+                    <th><?php echo sortLink('attempts', 'Intentos', $sort, $order); ?></th>
+                    <th><?php echo sortLink('correct', 'Correctos', $sort, $order); ?></th>
+                    <th><?php echo sortLink('rate', 'Tasa Éxito', $sort, $order); ?></th>
+                    <th><?php echo sortLink('errors', 'Errores (Media)', $sort, $order); ?></th>
                 </tr>
             </thead>
             <tbody>
