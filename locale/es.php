@@ -11,7 +11,7 @@ $langArray = array(
 				<li>Si algún campo de la cabecera TCP no se envía en un segmento, dejar el campo vacío</li>
 			  <li>Una vez enviada tu respuesta, se marca en verde los campos correctos y en rojo los incorrectos. Si tienes tres errores o más, se dejará de corregir la respuesta y se marcará en amarillo las respuestas no corregidas.</li>
 			  <li>Si tienes algún error, se recomienda darle al botón de \"atrás\" de tu navegador y corregir los campos incorrectos.</li>
-              <li>En los ejercicios con control de congestión, sólo rellenar los valores de CWND y Modo cuando alguno de estos cambie.</li>
+              <li>En los ejercicios con control de congestión, sólo rellenar los valores de CWND y Modo cuando alguno de estos cambie. En el caso de que sea necesario, utilice dos decimales separados por un punto decimal para el valor de CWND.</li>
               <li>El formato de estos ejercicios no tiene por qué ser igual al de los exámenes.</li>
 			  <li>Recuerda que tienes el Mapa Mental Aumentado de TCP <a href=\"https://mapamentalar1.web.uah.es/02-canvas/tcp.html\">aquí</a> por si algo no te queda claro.</li>
 			</ol>

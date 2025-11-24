@@ -10,7 +10,7 @@ $langArray = array(
     <li>If a field in the TCP header is not sent in a segment, leave the field empty.</li>
     <li>Once you submit your response, the correct fields will be marked green and incorrect fields red. If you have three or more errors, the correction of your response will stop and uncorrected responses will be marked yellow.</li>
     <li>If you have any error, it is recommended to click on the  \"back\" button in your browser and correct the incorrect fields.</li>
-    <li>In the exercises with congestion control, only fill in the CWND and Mode values when any of them change.</li>
+    <li>In the exercises with congestion control, only fill in the CWND and Mode values when any of them change. If necessary, use two decimals separated by a decimal point for the CWND value.</li>
     <li>The format of these exercises may not be related to that of the exams.</li>
     <li>Remember that you have the Enhanced Mental Map of TCP <a href=\"https://mapamentalar1.web.uah.es/02-canvas/tcp-English.html\">here</a> if anything remains unclear.</li>
   </ol>",
