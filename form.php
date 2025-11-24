@@ -8,7 +8,8 @@
 <body>
 
 	<nav class="navbar">
-		<h1>TCP Exercises</h1>
+		<h1><?php echo (isset($_GET['langID']) && $_GET['langID'] === 'en') ? 'TCP Exercises' : 'Ejercicios TCP'; ?>
+		</h1>
 	</nav>
 
 	<div class="container">
@@ -44,24 +45,34 @@
 				<input type="hidden" id="ExerciseID" name="ExerciseID" value="<?php echo $id; ?>">
 				<input type="hidden" name="langID" value="<?php echo htmlspecialchars($lang); ?>">
 
+				<div style="text-align: center; margin-bottom: 15px;">
+					<input type="submit"
+						value="<?php echo ($lang === 'en') ? 'Check Answer' : 'Comprobar Respuesta'; ?>"
+						class="btn-solve">
+				</div>
+
 				<table>
 					<tr class="header-row">
 						<th class="top-header separator-right"
 							colspan="<?php echo (isset($has_cc) && $has_cc) ? 2 : 0; ?>"
-							style="<?php echo (isset($has_cc) && $has_cc) ? '' : 'display:none'; ?>">Estado del Cliente
+							style="<?php echo (isset($has_cc) && $has_cc) ? '' : 'display:none'; ?>">
+							<?php echo ($lang === 'en') ? 'Client State' : 'Estado del Cliente'; ?>
 						</th>
-						<th class="top-header" colspan="8">Segmento del Cliente</th>
+						<th class="top-header" colspan="8">
+							<?php echo ($lang === 'en') ? 'Client Segment' : 'Segmento del Cliente'; ?></th>
 						<td></td>
-						<th class="top-header" colspan="8">Segmento del Servidor</th>
+						<th class="top-header" colspan="8">
+							<?php echo ($lang === 'en') ? 'Server Segment' : 'Segmento del Servidor'; ?></th>
 						<th class="top-header separator-left"
 							colspan="<?php echo (isset($has_cc) && $has_cc) ? 2 : 0; ?>"
-							style="<?php echo (isset($has_cc) && $has_cc) ? '' : 'display:none'; ?>">Estado del Servidor
+							style="<?php echo (isset($has_cc) && $has_cc) ? '' : 'display:none'; ?>">
+							<?php echo ($lang === 'en') ? 'Server State' : 'Estado del Servidor'; ?>
 						</th>
 					</tr>
 					<tr>
 						<?php if (isset($has_cc) && $has_cc): ?>
-							<th class="bottom-header">CWND</th>
-							<th class="bottom-header separator-right">Mode</th>
+							<th class="bottom-header"><?php echo ($lang === 'en') ? 'CWND' : 'VC'; ?></th>
+							<th class="bottom-header separator-right"><?php echo ($lang === 'en') ? 'Mode' : 'Modo'; ?></th>
 						<?php endif; ?>
 						<th class="bottom-header">SN</th>
 						<th class="bottom-header">AN</th>
@@ -81,8 +92,8 @@
 						<th class="bottom-header">MSS</th>
 						<th class="bottom-header">Data Len</th>
 						<?php if (isset($has_cc) && $has_cc): ?>
-							<th class="bottom-header separator-left">CWND</th>
-							<th class="bottom-header">Mode</th>
+							<th class="bottom-header separator-left"><?php echo ($lang === 'en') ? 'CWND' : 'VC'; ?></th>
+							<th class="bottom-header"><?php echo ($lang === 'en') ? 'Mode' : 'Modo'; ?></th>
 						<?php endif; ?>
 					</tr>
 
@@ -145,8 +156,6 @@
 					}
 					?>
 				</table>
-				<br>
-				<input type="submit" value="Check Answer">
 			</form>
 
 		</div> <!-- End card -->
