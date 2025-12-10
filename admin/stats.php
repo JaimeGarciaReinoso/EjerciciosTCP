@@ -21,28 +21,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cleanup'])) {
     }
 }
 
-// Fetch Summary Stats
-$totalAttempts = $pdo->query("SELECT COUNT(*) FROM ExerciseStats")->fetchColumn();
-$totalCorrect = $pdo->query("SELECT COUNT(*) FROM ExerciseStats WHERE is_correct = 1")->fetchColumn();
-$successRate = $totalAttempts > 0 ? round(($totalCorrect / $totalAttempts) * 100, 1) : 0;
-
 // Handle Filter
 $filterExerciseId = isset($_GET['filter_exercise']) ? $_GET['filter_exercise'] : 'all';
-$whereClause = "";
+$timeRange = isset($_GET['time_range']) ? $_GET['time_range'] : 'month';
+
+// Date Filter Logic
+$dateCondition = "";
+$dateParams = [];
+$dateJoinCondition = ""; // For the exercises query
+
+switch ($timeRange) {
+    case 'week':
+        $dateCondition = "timestamp >= DATE_SUB(NOW(), INTERVAL 1 WEEK)";
+        $dateJoinCondition = "AND s.timestamp >= DATE_SUB(NOW(), INTERVAL 1 WEEK)";
+        break;
+    case 'biweekly':
+        $dateCondition = "timestamp >= DATE_SUB(NOW(), INTERVAL 2 WEEK)";
+        $dateJoinCondition = "AND s.timestamp >= DATE_SUB(NOW(), INTERVAL 2 WEEK)";
+        break;
+    case 'month':
+        $dateCondition = "timestamp >= DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+        $dateJoinCondition = "AND s.timestamp >= DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+        break;
+    case 'year':
+        $dateCondition = "timestamp >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+        $dateJoinCondition = "AND s.timestamp >= DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+        break;
+    case 'all':
+    default:
+        $dateCondition = "1=1";
+        $dateJoinCondition = "";
+        break;
+}
+
+// Build WHERE clause for Summary and Daily Stats
+$whereConditions = [];
 $params = [];
 
 if ($filterExerciseId !== 'all' && is_numeric($filterExerciseId)) {
-    $whereClause = "WHERE exercise_id = ?";
+    $whereConditions[] = "exercise_id = ?";
     $params[] = $filterExerciseId;
 }
 
-// Fetch Daily Stats (Last 30 days)
+// Add date condition to WHERE
+if ($dateCondition !== "1=1") {
+    $whereConditions[] = $dateCondition;
+}
+
+$whereClause = "";
+if (!empty($whereConditions)) {
+    $whereClause = "WHERE " . implode(" AND ", $whereConditions);
+}
+
+// Fetch Summary Stats
+// Note: We need to apply filters to summary stats too
+$totalAttempts = $pdo->prepare("SELECT COUNT(*) FROM ExerciseStats $whereClause");
+$totalAttempts->execute($params);
+$totalAttempts = $totalAttempts->fetchColumn();
+
+$totalCorrectSql = "SELECT COUNT(*) FROM ExerciseStats $whereClause";
+if ($whereClause) {
+    $totalCorrectSql .= " AND is_correct = 1";
+} else {
+    $totalCorrectSql .= " WHERE is_correct = 1";
+}
+$totalCorrectStmt = $pdo->prepare($totalCorrectSql);
+$totalCorrectStmt->execute($params);
+$totalCorrect = $totalCorrectStmt->fetchColumn();
+
+$successRate = $totalAttempts > 0 ? round(($totalCorrect / $totalAttempts) * 100, 1) : 0;
+
+// Fetch Daily Stats
+// Limit 30 is still reasonable for the chart, but maybe we want more if 'year' is selected?
+// For now, let's keep the limit but apply the date filter.
+$limit = 30;
+if ($timeRange === 'week') $limit = 7;
+if ($timeRange === 'biweekly') $limit = 14;
+if ($timeRange === 'month') $limit = 30;
+if ($timeRange === 'year') $limit = 365; // Might be too many bars, but let's see.
+if ($timeRange === 'all') $limit = 100;
+
 $dailySql = "
     SELECT DATE(timestamp) as date, COUNT(*) as total, SUM(is_correct) as correct 
     FROM ExerciseStats 
     $whereClause
     GROUP BY DATE(timestamp) 
-    ORDER BY date DESC LIMIT 30
+    ORDER BY date DESC LIMIT $limit
 ";
 $dailyStmt = $pdo->prepare($dailySql);
 $dailyStmt->execute($params);
@@ -78,6 +142,7 @@ if ($sort === 'exercise') {
 }
 
 // Fetch Attempts by Exercise
+// We need to apply the date filter in the JOIN to keep all exercises listed
 $stmt = $pdo->query("
     SELECT 
         e.ExerciseID,
@@ -87,7 +152,7 @@ $stmt = $pdo->query("
         SUM(s.is_correct) as correct,
         AVG(s.error_count) as avg_errors
     FROM EnunTCP e
-    LEFT JOIN ExerciseStats s ON e.ExerciseID = s.exercise_id
+    LEFT JOIN ExerciseStats s ON e.ExerciseID = s.exercise_id $dateJoinCondition
     GROUP BY e.ExerciseID
     ORDER BY $sqlOrder
 ");
@@ -101,9 +166,14 @@ function sortLink($column, $label, $currentSort, $currentOrder)
     if ($currentSort === $column) {
         $arrow = $currentOrder === 'asc' ? ' ↑' : ' ↓';
     }
-    // Preserve filter param
-    $filter = isset($_GET['filter_exercise']) ? '&filter_exercise=' . urlencode($_GET['filter_exercise']) : '';
-    return "<a href=\"?sort=$column&order=$newOrder$filter\" style=\"color: inherit; text-decoration: none;\">$label$arrow</a>";
+    // Preserve filter params
+    $params = [];
+    if (isset($_GET['filter_exercise'])) $params['filter_exercise'] = $_GET['filter_exercise'];
+    if (isset($_GET['time_range'])) $params['time_range'] = $_GET['time_range'];
+    
+    $queryString = http_build_query(array_merge($params, ['sort' => $column, 'order' => $newOrder]));
+    
+    return "<a href=\"?$queryString\" style=\"color: inherit; text-decoration: none;\">$label$arrow</a>";
 }
 ?>
 <!DOCTYPE html>
@@ -300,12 +370,22 @@ function sortLink($column, $label, $currentSort, $currentOrder)
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
-            <h3>Actividad Diaria (Últimos 30 días)</h3>
+            <h3>Actividad</h3>
             <form method="GET" style="display: flex; gap: 10px; align-items: center;">
-                <label>Filtrar por:</label>
+                <label>Rango:</label>
+                <select name="time_range" onchange="this.form.submit()"
+                    style="padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
+                    <option value="week" <?php echo $timeRange == 'week' ? 'selected' : ''; ?>>Última semana</option>
+                    <option value="biweekly" <?php echo $timeRange == 'biweekly' ? 'selected' : ''; ?>>Últimas dos semanas</option>
+                    <option value="month" <?php echo $timeRange == 'month' ? 'selected' : ''; ?>>Último mes</option>
+                    <option value="year" <?php echo $timeRange == 'year' ? 'selected' : ''; ?>>Último año</option>
+                    <option value="all" <?php echo $timeRange == 'all' ? 'selected' : ''; ?>>Todo</option>
+                </select>
+
+                <label style="margin-left: 10px;">Ejercicio:</label>
                 <select name="filter_exercise" onchange="this.form.submit()"
                     style="padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
-                    <option value="all">Todos los ejercicios</option>
+                    <option value="all">Todos</option>
                     <?php foreach ($exercises as $ex): ?>
                         <option value="<?php echo $ex['ExerciseID']; ?>" <?php echo $filterExerciseId == $ex['ExerciseID'] ? 'selected' : ''; ?>>
                             Ej <?php echo $ex['ExerciseNum']; ?> - Parte <?php echo $ex['ExercisePart']; ?>
