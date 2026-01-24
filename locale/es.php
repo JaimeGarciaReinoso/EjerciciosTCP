@@ -13,7 +13,7 @@ $langArray = array(
 			  <li>Si tienes algún error, se recomienda darle al botón de \"atrás\" de tu navegador y corregir los campos incorrectos.</li>
               <li>En los ejercicios con control de congestión, sólo rellenar los valores de CWND y Modo cuando alguno de estos cambie. En el caso de que sea necesario, utilice dos decimales separados por un punto decimal para el valor de CWND.</li>
               <li>El formato de estos ejercicios no tiene por qué ser igual al de los exámenes.</li>
-			  <li>Recuerda que tienes el Mapa Mental Aumentado de TCP <a href=\"https://mapamentalar1.web.uah.es/02-canvas/tcp.html\">aquí</a> por si algo no te queda claro.</li>
+			  <li>Recuerda que tienes el Mapa Mental Aumentado de TCP <a href=\"https://mapamentalar1.web.uah.es/mapamental\">aquí</a> por si algo no te queda claro.</li>
 			</ol>
 
 
